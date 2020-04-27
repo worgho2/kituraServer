@@ -13,12 +13,14 @@ public let health = Health()
 public class App {
     let router = Router()
     let cloudEnv = CloudEnv()
-    
-    let dataAccessObject: DataAccessObject = MockDAO()
 
     public init() throws {
+        //configure database
+        Persistence.setup()
+        
         // Configure logging
         initializeLogging()
+        
         // Run the metrics initializer
         initializeMetrics(router: router)
     }
@@ -28,6 +30,7 @@ public class App {
         initializeHealthRoutes(app: self)
         initializeReflexionRoutes(app: self)
         
+        // Open API
         KituraOpenAPI.addEndpoints(to: router)
     }
 

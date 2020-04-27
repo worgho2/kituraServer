@@ -7,14 +7,20 @@
 
 import Foundation
 import KituraContracts
+import SwiftKueryORM
 
-class Reflexion: Codable {
-    let id: String
-    let createdAt: Date
+struct Reflexion: Model {
+    var id: String
+    var createdAt: Date
     var modifiedAt: Date
     var text: String
 }
 
 class ReflexionParams: QueryParams {
     var id: String?
+}
+
+class AllRelflexionsParams: QueryParams {
+    var from: Date?
+    var to: Date?
 }
