@@ -11,20 +11,18 @@ import SwiftKueryPostgreSQL
 import LoggerAPI
 
 class Persistence {
+    
     static func setup() {
+        
         let pool = PostgreSQLConnection.createPool (
-            host: "localhost", //ProcessInfo.processInfo.environment["DBHOST"] ??
+            host: ProcessInfo.processInfo.environment["DBHOST"] ?? "localhost",
             port: 5432,
             options: [
                 .databaseName("kituraServer"),
-                .userName("postgres"), //ProcessInfo.processInfo.environment["DBUSER"] ??
-                .password("nil"), // ProcessInfo.processInfo.environment["DBPASSWORD"] ??
+                .userName(ProcessInfo.processInfo.environment["DBUSER"] ?? "postgres"),
+                .password(ProcessInfo.processInfo.environment["DBPASSWORD"] ?? "nil"),
             ],
-            poolOptions: ConnectionPoolOptions(
-                initialCapacity: 10,
-                maxCapacity: 50,
-                timeout: 10000
-            )
+            poolOptions: ConnectionPoolOptions(initialCapacity: 10, maxCapacity: 50, timeout: 10000)
         )
         
         Database.default = Database(pool)
@@ -38,7 +36,6 @@ class Persistence {
                 Log.error(error.localizedDescription)
             }
         }
-        
         
     }
 }

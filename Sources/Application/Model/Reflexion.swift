@@ -11,8 +11,8 @@ import SwiftKueryORM
 
 struct Reflexion: Model {
     var id: String
-    var createdAt: Date
-    var modifiedAt: Date
+    var created_at: Date
+    var modified_at: Date
     var text: String
 }
 
