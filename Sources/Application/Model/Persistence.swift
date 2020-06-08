@@ -13,6 +13,7 @@ import LoggerAPI
 class Persistence {
     
     static func setup() {
+        Log.info("PostgreSQL_connection setup started")
         
         let pool = PostgreSQLConnection.createPool (
             host: ProcessInfo.processInfo.environment["DBHOST"] ?? "localhost",
@@ -29,6 +30,7 @@ class Persistence {
         
         do {
             try Reflexion.createTableSync()
+            Log.info("\(Reflexion.tableName) created")
         } catch let error {
             if let requestError = error as? RequestError, requestError.rawValue == RequestError.ormQueryError.rawValue {
                 Log.info("\(Reflexion.tableName) already created")
@@ -37,5 +39,18 @@ class Persistence {
             }
         }
         
+        do {
+            try UserAuth.createTableSync()
+            Log.info("\(UserAuth.tableName) created")
+        } catch let error {
+            if let requestError = error as? RequestError, requestError.rawValue == RequestError.ormQueryError.rawValue {
+                Log.info("\(UserAuth.tableName) already created")
+            } else {
+                Log.error(error.localizedDescription)
+            }
+        }
+        
+        Log.info("PostgreSQL_connection setup ended")
     }
+    
 }

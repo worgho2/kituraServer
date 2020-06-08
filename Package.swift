@@ -12,6 +12,7 @@ let package = Package(
       .package(url: "https://github.com/IBM-Swift/Kitura-OpenAPI.git", from: "1.1.1"),
       .package(url: "https://github.com/IBM-Swift/Swift-Kuery-ORM", from: "0.3.1"),
       .package(url: "https://github.com/IBM-Swift/Swift-Kuery-PostgreSQL", from: "1.2.0"),
+      .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsHTTP.git", from: "2.1.0"),
     ],
     targets: [
       .target(name: "kituraServer", dependencies: [ .target(name: "Application"),
@@ -26,6 +27,7 @@ let package = Package(
                                                    "KituraOpenAPI",
                                                    "SwiftKueryPostgreSQL",
                                                    "SwiftKueryORM",
+                                                   "CredentialsHTTP",
 
       ]),
 
@@ -35,6 +37,7 @@ let package = Package(
                                                              "KituraOpenAPI",
                                                              "SwiftKueryPostgreSQL",
                                                              "SwiftKueryORM",
+                                                             "CredentialsHTTP",
       ])
         
     ]

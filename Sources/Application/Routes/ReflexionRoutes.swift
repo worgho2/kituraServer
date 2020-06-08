@@ -17,7 +17,7 @@ func initializeReflexionRoutes(app: App) {
     app.router.put("/reflexion", handler: updateReflexion)
 }
 
-func createReflexion(reflexion: Reflexion, respondWith: @escaping(Reflexion?, RequestError?) -> Void) {
+func createReflexion(user: UserAuth, reflexion: Reflexion, respondWith: @escaping(Reflexion?, RequestError?) -> Void) {
     var storeEntry = reflexion
     storeEntry.id = UUID().uuidString
     storeEntry.created_at = Date()
@@ -26,18 +26,18 @@ func createReflexion(reflexion: Reflexion, respondWith: @escaping(Reflexion?, Re
     storeEntry.save(respondWith)
 }
 
-func readAllReflexions(respondWith: @escaping([Reflexion]?, RequestError?) -> Void) {
+func readAllReflexions(user: UserAuth, respondWith: @escaping([Reflexion]?, RequestError?) -> Void) {
     Reflexion.findAll(respondWith)
 }
 
-func readReflexion(params: AllRelflexionsParams, respondWith: @escaping([Reflexion]?, RequestError?) -> Void) {
+func readReflexion(user: UserAuth, params: AllRelflexionsParams, respondWith: @escaping([Reflexion]?, RequestError?) -> Void) {
     Reflexion.findAll(matching: params, respondWith)
 }
 
-func deleteReflexion(id: String, respondWith: @escaping(RequestError?) -> Void) {
+func deleteReflexion(user: UserAuth, id: String, respondWith: @escaping(RequestError?) -> Void) {
     Reflexion.delete(id: id, respondWith)
 }
 
-func updateReflexion(id: String, reflexion: Reflexion, respondWith: @escaping(Reflexion?, RequestError?) -> Void) {
+func updateReflexion(user: UserAuth, id: String, reflexion: Reflexion, respondWith: @escaping(Reflexion?, RequestError?) -> Void) {
     reflexion.update(id: id, respondWith)
 }
